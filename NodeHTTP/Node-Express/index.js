@@ -15,9 +15,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-app.use('/dishes', dishRouter);
-app.use('/promotions', promoRouter);
-app.use('/leaders', leaderRouter);
+app.use('/dishes', dishRouter); // base URl for dishes
+app.use('/promotions', promoRouter); //base URl for promotion
+app.use('/leaders', leaderRouter);  // base URl for leaders
+
 
 app.use((req, res, next) => {
     res.statusCode = 200;
