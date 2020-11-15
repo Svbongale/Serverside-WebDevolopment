@@ -54,6 +54,9 @@ app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+
+
 // Authentication middleware
 // function auth (req, res, next) {
 //   console.log(req.session);
