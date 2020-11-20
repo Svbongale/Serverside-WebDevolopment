@@ -34,13 +34,19 @@ connect.then((db) => {
 
 
 var app = express();
-
+app.all('*', (req, res, next) => {
+  if(req.secure){ //if the  incoming request is already secure
+    return next();
+  }else{
+    res.redirect(307 , 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+  }
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser('12345-67890-09876-54321'));
